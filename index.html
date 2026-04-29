@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>osu! Profile Card - 杜野凜世 Style</title>
+    <title>osu! Profile Card - 杜野凜世 [宵、其の如く]</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@900&family=Rajdhani:wght@600;700&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
     <style>
@@ -11,7 +11,17 @@
             --rinze-red: #b22d35;
             --rinze-gold: #d4af37;
         }
-        body { background: #0d0d0f; font-family: 'Sawarabi Mincho', serif; }
+        /* 禁止捲動並讓背景全黑，讓 16:9 的卡片在中間 */
+        body { 
+            background: #000; 
+            font-family: 'Sawarabi Mincho', serif; 
+            margin: 0; 
+            height: 100vh; 
+            overflow: hidden; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         
         .username-link {
             transition: all 0.3s ease;
@@ -23,7 +33,7 @@
         }
 
         .mode-btn {
-            @apply px-3 py-1 text-[10px] font-bold tracking-widest uppercase transition-all duration-300;
+            @apply px-4 py-2 text-[0.8vw] font-bold tracking-widest uppercase transition-all duration-300;
             border: 1px solid rgba(212, 175, 55, 0.3);
             color: rgba(212, 175, 55, 0.7);
             background: rgba(0, 0, 0, 0.4);
@@ -39,47 +49,43 @@
             color: white;
             box-shadow: 0 0 15px rgba(178, 45, 53, 0.6);
         }
-
-        .card-border {
-            border: 1px solid rgba(178,45,53,0.4);
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.8), 0 15px 35px rgba(0,0,0,0.6);
-        }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-6">
+<body>
 
-    <div class="relative w-full max-w-4xl h-[300px] overflow-hidden rounded-xl card-border bg-[#1a1618]">
+    <!-- 容器：鎖定 16:9 比例，並根據視窗大小自動調整 -->
+    <div class="relative w-full max-w-[100vw] aspect-video overflow-hidden bg-[#1a1618] shadow-2xl">
         
-        <!-- 背景影片 -->
-        <video class="absolute inset-0 w-full h-full object-cover object-top opacity-90" autoplay loop muted playsinline>
+        <!-- 背景影片：這下保證跟影片原本的構圖完全一致 -->
+        <video class="absolute inset-0 w-full h-full object-contain" autoplay loop muted playsinline>
             <source src="1040120020.mp4" type="video/mp4">
         </video>
 
-        <!-- 遮罩 -->
+        <!-- 漸層遮罩 -->
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-[#0d0d0f]/20 to-[#0d0d0f]/95"></div>
 
-        <div class="relative h-full flex flex-col justify-center p-10 z-10 w-full md:w-7/12 ml-auto text-right">
+        <!-- 內容區塊：使用 vw 單位讓字體大小隨容器縮放 -->
+        <div class="relative h-full flex flex-col justify-center p-[5vw] z-10 w-full md:w-7/12 ml-auto text-right">
             
-            <div class="mb-4 flex flex-col items-end">
-                <!-- 點擊連結到放課後官網 -->
+            <div class="mb-[2vw] flex flex-col items-end">
                 <a href="https://shinycolors.idolmaster-official.jp/idol/hokagoclimaxgirls/" 
                    target="_blank" 
-                   class="border-r-4 border-[#d4af37] pr-3 py-1 text-[#d4af37] text-[10px] font-bold tracking-[0.3em] mb-4 bg-black/50 hover:text-white hover:border-white transition-all duration-300 cursor-pointer block w-fit">
+                   class="border-r-4 border-[#d4af37] pr-[1vw] py-[0.2vw] text-[#d4af37] text-[0.8vw] font-bold tracking-[0.3em] mb-[1.5vw] bg-black/50 hover:text-white hover:border-white transition-all duration-300 cursor-pointer block w-fit">
                     放課後クライマックスガールズ
                 </a>
                 
-                <div class="flex items-center gap-5 mt-1">
+                <div class="flex items-center gap-[1.5vw] mt-[0.5vw]">
                     <a id="profile-link" href="#" target="_blank" class="username-link block">
-                        <h1 id="osu-username" class="text-white font-['Noto Serif JP'] text-5xl tracking-tighter cursor-pointer">Loading...</h1>
+                        <h1 id="osu-username" class="text-white font-['Noto Serif JP'] text-[5vw] tracking-tighter cursor-pointer">Loading...</h1>
                     </a>
-                    <img id="osu-avatar" src="" alt="Avatar" class="w-14 h-14 rounded-full border-2 border-[#d4af37]/60 object-cover hidden">
+                    <img id="osu-avatar" src="" alt="Avatar" class="w-[5vw] h-[5vw] rounded-full border-2 border-[#d4af37]/60 object-cover hidden shadow-2xl">
                 </div>
                 
-                <p id="osu-rank" class="text-slate-400 font-['Rajdhani'] text-xs mt-4 tracking-[0.2em] uppercase font-semibold">Connecting...</p>
+                <p id="osu-rank" class="text-slate-400 font-['Rajdhani'] text-[1.2vw] mt-[1vw] tracking-[0.2em] uppercase font-semibold">Connecting...</p>
             </div>
 
             <!-- 模式切換 -->
-            <div class="flex justify-end gap-2 mb-6">
+            <div class="flex justify-end gap-[0.5vw] mb-[3vw]">
                 <button onclick="changeMode('osu', this)" class="mode-btn active">Standard</button>
                 <button onclick="changeMode('taiko', this)" class="mode-btn">Taiko</button>
                 <button onclick="changeMode('fruits', this)" class="mode-btn">Catch</button>
@@ -87,19 +93,19 @@
             </div>
 
             <!-- 數據區 -->
-            <div class="flex justify-end gap-10">
+            <div class="flex justify-end gap-[4vw]">
                 <div>
-                    <p class="text-[#b22d35] text-[10px] font-bold tracking-[0.2em] mb-1">成果 (PP)</p>
-                    <span id="osu-pp" class="font-['Rajdhani'] text-white text-4xl font-bold tracking-tight" style="text-shadow: 0 0 10px rgba(178,45,53,0.5);">---</span>
+                    <p class="text-[#b22d35] text-[0.8vw] font-bold tracking-[0.2em] mb-[0.5vw]">成果 (PP)</p>
+                    <span id="osu-pp" class="font-['Rajdhani'] text-white text-[4vw] font-bold tracking-tight" style="text-shadow: 0 0 1.5vw rgba(178,45,53,0.5);">---</span>
                 </div>
 
-                <div class="w-[1px] h-10 my-auto bg-white/10"></div>
+                <div class="w-[1px] h-[4vw] my-auto bg-white/10"></div>
 
                 <div>
-                    <p class="text-[#00ffcc] text-[10px] font-bold tracking-[0.2em] mb-1">精確度 (ACC)</p>
-                    <div class="flex items-baseline justify-end gap-1">
-                        <span id="osu-acc" class="font-['Rajdhani'] text-white text-4xl font-bold tracking-tight" style="text-shadow: 0 0 10px rgba(0,255,204,0.4);">---</span>
-                        <span class="text-[#00ffcc]/60 text-[10px]">%</span>
+                    <p class="text-[#00ffcc] text-[0.8vw] font-bold tracking-[0.2em] mb-[0.5vw]">精確度 (ACC)</p>
+                    <div class="flex items-baseline justify-end gap-[0.5vw]">
+                        <span id="osu-acc" class="font-['Rajdhani'] text-white text-[4vw] font-bold tracking-tight" style="text-shadow: 0 0 1.5vw rgba(0,255,204,0.4);">---</span>
+                        <span class="text-[#00ffcc]/60 text-[1vw]">%</span>
                     </div>
                 </div>
             </div>
@@ -116,7 +122,8 @@
             const profileLink = document.getElementById('profile-link');
 
             try {
-                const response = await fetch(`https://osu-rinze-api.onrender.com/api/my-osu-data?mode=${mode}`);
+                // 使用 Render 的絕對路徑或相對路徑
+                const response = await fetch(`/api/my-osu-data?mode=${mode}`);
                 if (!response.ok) throw new Error('Offline');
 
                 const data = await response.json();
