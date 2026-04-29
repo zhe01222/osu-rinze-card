@@ -116,7 +116,7 @@
             const profileLink = document.getElementById('profile-link');
 
             try {
-                const response = await fetch(`http://127.0.0.1:8000/api/my-osu-data?mode=${mode}`);
+                const response = await fetch(`http://https://osu-rinze-api.onrender.com/api/my-osu-data?mode=${mode}`);
                 if (!response.ok) throw new Error('Offline');
 
                 const data = await response.json();
