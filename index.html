@@ -57,9 +57,10 @@
     <div class="relative w-full max-w-[100vw] aspect-video overflow-hidden bg-[#1a1618] shadow-2xl">
         
         <!-- 背景影片：這下保證跟影片原本的構圖完全一致 -->
-        <video class="absolute inset-0 w-full h-full object-contain" autoplay loop muted playsinline>
-            <source src="1040120020.mp4" type="video/mp4">
-        </video>
+        <video class="absolute inset-0 w-full h-full object-contain" autoplay loop muted playsinline poster="bg-fallback.jpg">
+    <source src="1040120020.mp4" type="video/mp4">
+</video>
+
 
         <!-- 漸層遮罩 -->
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-[#0d0d0f]/20 to-[#0d0d0f]/95"></div>
